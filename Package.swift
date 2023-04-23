@@ -26,7 +26,7 @@ let package = Package(
                 .product(name: "RswiftLibrary", package: "R.swift"),
             ],
             path: "Sources",
-            plugins: [.plugin(name: "RswiftGeneratePublicResources", package: "R.swift")]
+            plugins: [.plugin(name: "RswiftGenerateInternalResources", package: "R.swift")]
         ),
         .testTarget(
             name: "SmartbookCoreTests",

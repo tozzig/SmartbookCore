@@ -19,7 +19,9 @@ open class BaseCoordinator<ResultType> {
         childCoordinators[coordinator.identifier] = nil
     }
 
-    open func coordinate<T>(
+    public init() { }
+
+    public func coordinate<T>(
         to coordinator: BaseCoordinator<T>,
         nextScene: SceneProtocol? = nil,
         animated: Bool = true
