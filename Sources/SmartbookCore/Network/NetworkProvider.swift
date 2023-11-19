@@ -10,6 +10,8 @@ public protocol NetworkProviderProtocol {
 public final class NetworkProvider: NetworkProviderProtocol {
     private let requestTimeout: TimeInterval = 60
 
+    public init() {}
+
     private(set) lazy var session: Session = {
         let configuartion = URLSessionConfiguration.default
         configuartion.timeoutIntervalForRequest = requestTimeout
@@ -17,16 +19,16 @@ public final class NetworkProvider: NetworkProviderProtocol {
     }()
 
     public func request<T: Decodable>(request: RequestProtocol) -> Single<T> {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
         let dataRequest = session.request(
             request.baseURL.appendingPathComponent(request.path),
             method: request.method,
             parameters: request.parameters,
             encoding: request.paramsEncoding,
             headers: request.headers
-        )
-        return dataRequest.rx.decodable(decoder: decoder)
+        ).validate(statusCode: [200])
+
+        return dataRequest.rx
+            .result(responseSerializer: DecodableResponseSerializer(decoder: JSONDecoder(), emptyResponseCodes: Set([200])))
             .asSingle()
             .subscribe(on: Scheduler.network)
             .observe(on: Scheduler.network)

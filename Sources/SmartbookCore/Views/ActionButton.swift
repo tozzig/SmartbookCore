@@ -8,6 +8,10 @@
 import UIKit
 
 public class ActionButton: UIButton {
+    public override var intrinsicContentSize: CGSize {
+        CGSize(width: UIView.noIntrinsicMetric, height: 44)
+    }
+
     public override var isEnabled: Bool {
         didSet {
             backgroundColor = isEnabled ? R.color.main() : R.color.inactive()

@@ -27,5 +27,7 @@ open class TextField: UITextField {
         layer.borderWidth = 1
         layer.cornerRadius = 6
         clipsToBounds = true
+        autocorrectionType = .no
+        autocapitalizationType = .none
     }
 }

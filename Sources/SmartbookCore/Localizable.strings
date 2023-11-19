@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Anton Tsikhanau on 5.08.23.
+  
+*/
+
+"Unknown error" = "Unknown error";
+"Internal Server Error" = "Internal server error occured. Please try again later";
+"Ok" = "OK";
+"Error" = "Error";

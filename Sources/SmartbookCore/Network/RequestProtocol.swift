@@ -10,7 +10,7 @@ public protocol RequestProtocol: URLConvertible {
     var paramsEncoding: ParameterEncoding { get }
 }
 
-extension RequestProtocol {
+public extension RequestProtocol {
     var path: String {
         ""
     }
@@ -30,9 +30,7 @@ extension RequestProtocol {
     var paramsEncoding: ParameterEncoding {
         URLEncoding.default
     }
-}
 
-extension RequestProtocol {
     func asURL() throws -> URL {
         var originalRequest: URLRequest?
         originalRequest = try URLRequest(url: baseURL.appendingPathComponent(path), method: method, headers: headers)

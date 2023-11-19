@@ -22,4 +22,21 @@ public extension ObservableType {
             .filter { filterSelector($0.1) }
             .map { $0.0 }
     }
+
+    func toOptional() -> Observable<Element?> {
+        map(Optional.init)
+    }
+}
+
+
+public extension PrimitiveSequence where Trait == SingleTrait {
+    func toOptional() -> Single<Element?> {
+        map(Optional.init)
+    }
+}
+
+public extension SharedSequence where SharingStrategy == DriverSharingStrategy {
+    func toOptional() -> Driver<Element?> {
+        map(Optional.init)
+    }
 }

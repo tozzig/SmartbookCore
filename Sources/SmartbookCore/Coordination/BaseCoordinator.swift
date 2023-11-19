@@ -28,12 +28,18 @@ open class BaseCoordinator<ResultType> {
     ) -> Driver<T> {
         store(coordinator: coordinator)
         return coordinator.start(nextScene: nextScene, animated: animated)
-            .do { [weak self] _ in
-                self?.free(coordinator: coordinator)
+            .do { [weak self, weak coordinator] _ in
+                if let coordinator {
+                    self?.free(coordinator: coordinator)
+                }
             }
     }
 
     open func start(nextScene: SceneProtocol? = nil, animated: Bool = true) -> Driver<ResultType> {
         fatalError("Start method should be implemented.")
+    }
+
+    deinit {
+        print("Deinit of \(Self.self)")
     }
 }

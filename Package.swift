@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SmartbookCore",
+    platforms: [.iOS(.v15)],
     products: [
         .library(
             name: "SmartbookCore",
